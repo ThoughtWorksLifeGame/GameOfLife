@@ -51,3 +51,14 @@ TEST(matrix_test,IsCoordLegal)
     EXPECT_FALSE(testMatrix.IsCoordLegal(dim, dim + 1));
     EXPECT_FALSE(testMatrix.IsCoordLegal(-1, -1));
 }
+TEST(matrix_test,operator_test)
+{
+    Matrix::MatrixType testmatrix = {
+            {1,0,1,0,1},
+            {0,1,0,1,0},
+            {1,0,1,0,1},
+            {0,1,0,1,0},
+            {1,0,1,0,1},
+    };
+    EXPECT_TRUE(matrix==testmatrix);
+}
