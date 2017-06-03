@@ -16,7 +16,7 @@ TEST(matrix_test, AssignInitState_test)
 {
     Matrix testMatrix(matrix.size());
     testMatrix.AssignInitState(matrix);
-    const auto& innerMatrix=testMatrix.getcurrentMatrix();
+    const auto& innerMatrix= testMatrix.GetCurrentMatrix();
     for (int i=0; i<matrix.size();i++)
     {
         EXPECT_EQ(innerMatrix[i].size(),matrix[i].size());
