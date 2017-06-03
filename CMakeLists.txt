@@ -4,7 +4,7 @@ project(${PROJECT_NAME_STR})
 
 find_package(Threads REQUIRED)
 
-add_definitions(-Wall -std=c++11 -Wno-deprecated -pthread)
+add_definitions(-Wall -std=c++11 -Wno-deprecated -pthread -DGTEST)
 
 set(COMMON_INCLUDES  ${PROJECT_SOURCE_DIR}/include)
 set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/ext)
@@ -17,9 +17,8 @@ set(PROJECT_TEST_NAME ${PROJECT_NAME_STR}_test)
 include_directories(${GTEST_INCLUDE_DIRS} ${COMMON_INCLUDES})
 
 file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
-add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES} tests/test.cpp src/Matrix.cpp src/Matrix.h)
+add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES} tests/test.cpp src/Matrix.cpp src/Matrix.h tests/MatrixTest.cpp)
 add_dependencies(${PROJECT_TEST_NAME} googletest)
-
 if(NOT WIN32 OR MINGW)
     target_link_libraries(${PROJECT_TEST_NAME}
             ${GTEST_LIBS_DIR}/libgtest.a

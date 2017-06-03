@@ -4,6 +4,12 @@
 
 #ifndef GAMEOFLIFE_MATRIX_H
 #define GAMEOFLIFE_MATRIX_H
+
+#ifdef GTEST
+#define private public
+#define protected public
+#endif
+
 #include <vector>
 
 
@@ -96,6 +102,10 @@ public:
         prevMatrix = matrix;
         GetNetMatrixByAliveCells();
         return prevMatrix;
+    }
+    const MatrixType& getcurrentMatrix()
+    {
+        return matrix;
     }
 };
 
