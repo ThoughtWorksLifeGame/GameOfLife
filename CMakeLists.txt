@@ -4,6 +4,7 @@ project(${PROJECT_NAME_STR})
 
 find_package(Threads REQUIRED)
 
+include_directories(./include)
 add_definitions(-Wall -std=c++11 -Wno-deprecated -pthread -DGTEST)
 
 set(COMMON_INCLUDES  ${PROJECT_SOURCE_DIR}/include)
@@ -17,7 +18,7 @@ set(PROJECT_TEST_NAME ${PROJECT_NAME_STR}_test)
 include_directories(${GTEST_INCLUDE_DIRS} ${COMMON_INCLUDES})
 
 file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
-add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES} tests/test.cpp src/Matrix.cpp include/Matrix.h tests/MatrixTest.cpp)
+add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES} tests/test.cpp src/Matrix.cpp include/Matrix.h tests/MatrixTest.cpp src/Director.cpp)
 add_dependencies(${PROJECT_TEST_NAME} googletest)
 if(NOT WIN32 OR MINGW)
     target_link_libraries(${PROJECT_TEST_NAME}
@@ -38,5 +39,6 @@ endif()
 target_link_libraries(${PROJECT_TEST_NAME} ${CMAKE_THREAD_LIBS_INIT})
 add_test(test1 ${PROJECT_TEST_NAME})
 
-set(PROJECT_SOURCES main.cpp src/Matrix.cpp include/Matrix.h)
-add_executable(${PROJECT_NAME_STR} ${PROJECT_SOURCES})
+set(PROJECT_SOURCES main.cpp src/Matrix.cpp include/Matrix.h src/Director.cpp include/Director.h)
+#add_executable(${PROJECT_NAME_STR} ${PROJECT_SOURCES})
+add_library(${PROJECT_NAME_STR} ${PROJECT_SOURCES})

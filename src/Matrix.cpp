@@ -54,34 +54,38 @@ int Matrix::GetCountOfAliveCellsAround(int x, int y)
     return aliveCellsAroundCount;
 }
 
-void Matrix::GetNetMatrixByAliveCells()
+void Matrix::GenerateNextMatrix()
 {
-    for (auto &aliveCell : aliveCells)
+    std::vector<std::pair<int, int>> newAlives;
+    for (int x = 0; x < matrixDim; x++)
     {
-        int x = aliveCell.first, y = aliveCell.second;
-        int aliveCount = GetCountOfAliveCellsAround(x, y);
+        for (int y = 0; y < matrixDim; y++)
+        {
+            int aliveCount = GetCountOfAliveCellsAround(x, y);
 
-        bool aliveRes;
+            bool aliveRes;
 
-        if (aliveCount == 3)
-        {
-            aliveRes = true;
-        } else if (aliveCount == 2)
-        {
-            aliveRes = prevMatrix[x][y];
+            if (aliveCount == 3)
+            {
+                aliveRes = true;
+            } else if (aliveCount == 2)
+            {
+                aliveRes = prevMatrix[x][y];
+            }
+            else
+            {
+                aliveRes = false;
+            }
+
+            matrix[x][y] = aliveRes;
         }
-        else
-        {
-            aliveRes = false;
-        }
-        matrix[x][y] = aliveRes;
     }
 }
 
 const Matrix::MatrixType &Matrix::GetNextMatrix()
 {
     prevMatrix = matrix;
-    Matrix::GetNetMatrixByAliveCells();
+    Matrix::GenerateNextMatrix();
     return prevMatrix;
 }
 

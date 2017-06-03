@@ -18,7 +18,6 @@ public:
     typedef std::vector<std::vector<bool>> MatrixType;
 private:
     int matrixDim;
-    std::vector<std::pair<int, int>> aliveCells;
     MatrixType matrix, prevMatrix;
 public:
     Matrix(int n);
@@ -28,7 +27,7 @@ public:
 
     int GetCountOfAliveCellsAround(int x, int y);
 
-    void GetNetMatrixByAliveCells();
+    void GenerateNextMatrix();
 
     const MatrixType& GetNextMatrix();
 
