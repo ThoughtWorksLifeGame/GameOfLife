@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "../src/matrix.h"
+#include "../include/Matrix.h"
 Matrix::MatrixType matrix = {
                 {1,0,1,0,1},
                 {0,1,0,1,0},
